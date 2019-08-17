@@ -4,12 +4,88 @@ import ListView from "../components/listView"
 
 const data = [
      {
-          title: "Appointments",
-          icon: "av-timer"
+          title: "Amy Farha",
+          avatar:
+               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+          subtitle: "เลขที่ 1",
+          absent: true
      },
      {
-          title: "Trips",
-          icon: "flight-takeoff"
+          title: "Amy Farha",
+          avatar:
+               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+          subtitle: "เลขที่ 1",
+          absent: false
+     },
+     {
+          title: "Amy Farha",
+          avatar:
+               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+          subtitle: "เลขที่ 1",
+          absent: false
+     },
+     {
+          title: "Amy Farha",
+          avatar:
+               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+          subtitle: "เลขที่ 1",
+          absent: false
+     },
+     {
+          title: "Amy Farha",
+          avatar:
+               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+          subtitle: "เลขที่ 1",
+          absent: false
+     },
+     {
+          title: "Amy Farha",
+          avatar:
+               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+          subtitle: "เลขที่ 1",
+          absent: false
+     },
+     {
+          title: "Amy Farha",
+          avatar:
+               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+          subtitle: "เลขที่ 1",
+          absent: false
+     },
+     {
+          title: "Amy Farha",
+          avatar:
+               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+          subtitle: "เลขที่ 1",
+          absent: false
+     },
+     {
+          title: "Amy Farha",
+          avatar:
+               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+          subtitle: "เลขที่ 1",
+          absent: false
+     },
+     {
+          title: "Amy Farha",
+          avatar:
+               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+          subtitle: "เลขที่ 1",
+          absent: false
+     },
+     {
+          title: "Amy Farha",
+          avatar:
+               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+          subtitle: "เลขที่ 1",
+          absent: false
+     },
+     {
+          title: "Amy Farha",
+          avatar:
+               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+          subtitle: "เลขที่ 1",
+          absent: false
      }
 ]
 
@@ -28,7 +104,7 @@ StudentScreen.navigationOptions = {
 const styles = StyleSheet.create({
      container: {
           flex: 1,
-          paddingTop: 15,
+          marginTop: 15,
           backgroundColor: "#fff"
      }
 })
