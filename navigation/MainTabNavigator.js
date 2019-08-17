@@ -2,14 +2,16 @@ import React from "react"
 import { Platform } from "react-native"
 import {
      createStackNavigator,
-     createBottomTabNavigator
+     createBottomTabNavigator,
+     createDrawerNavigator
 } from "react-navigation"
 
 import TabBarIcon from "../components/TabBarIcon"
 import SettingsScreen from "../screens/SettingsScreen"
-import AgendaScreen from "../screens/AgendaScreen"
-import DriverScreen from "../screens/DriverScreen"
-import StudentScreen from "../screens/StudentScreen"
+import AgendaScreen from "../screens/teacher/AgendaScreen"
+import DriverScreen from "../screens/teacher/DriverScreen"
+import StudentScreen from "../screens/teacher/StudentScreen"
+import CourseStudentScreen from "../screens/teacher/CourseStudentScreen"
 
 const config = Platform.select({
      web: { headerMode: "screen" },
@@ -27,6 +29,20 @@ DriverStack = createStackNavigator({
 StudentListStack = createStackNavigator({
      studentList: StudentScreen
 })
+
+CourseStudentStack = createStackNavigator({
+     courseStudent: CourseStudentScreen
+})
+
+CourseStudentStack.navigationOptions = {
+     tabBarLabel: "รายชื่อนักเรียน",
+     tabBarIcon: ({ focused }) => (
+          <TabBarIcon
+               focused={focused}
+               name={Platform.OS === "ios" ? "ios-people" : "md-people"}
+          />
+     )
+}
 
 TeacherAgendaStack.navigationOptions = {
      tabBarLabel: "ตารางสอน",
@@ -75,8 +91,6 @@ SettingsStack.navigationOptions = {
      )
 }
 
-SettingsStack.path = ""
-
 const teacherNavigator = {
      StudentListStack,
      TeacherAgendaStack,
@@ -84,8 +98,28 @@ const teacherNavigator = {
      SettingsStack
 }
 
-const tabNavigator = createBottomTabNavigator(teacherNavigator)
+const subjectNavigator = {
+     CourseStudentStack
+}
 
-tabNavigator.path = ""
+const CourseTabNavigator = createBottomTabNavigator(subjectNavigator)
+const TeacherTabNavigator = createBottomTabNavigator(teacherNavigator)
 
-export default tabNavigator
+CourseTabNavigator.navigationOptions = {
+     drawerLabel: "วิชา"
+}
+
+TeacherTabNavigator.navigationOptions = {
+     drawerLabel: "ประจำชั้น"
+}
+
+const drawer = {
+     Teacher: TeacherTabNavigator,
+
+     Course: CourseTabNavigator
+}
+const navigator = createDrawerNavigator(drawer)
+
+navigator.path = ""
+
+export default navigator

@@ -1,66 +1,19 @@
 import React, { Component } from "react"
 import { ScrollView, StyleSheet, Alert } from "react-native"
-import { ListItem, Button } from "react-native-elements"
+import StudentListView from "../../components/StudentListView"
 
 export default (StudentScreen = () => {
      return (
           <ScrollView style={styles.container}>
-               <ListView data={data} />
+               <StudentListView
+                    data={data}
+                    title={"เช๊คชื่อ"}
+                    choices={["มา", "ขาด"]}
+                    controlled
+               />
           </ScrollView>
      )
 })
-
-const ListView = ({ data }) => (
-     <ScrollView>
-          {data.map((item, i) => (
-               <ListItem
-                    key={i}
-                    title={item.title}
-                    subtitle={item.subtitle}
-                    leftAvatar={{ source: { uri: item.avatar } }}
-                    rightElement={() => <ControlButton status={item.absent} />}
-               />
-          ))}
-     </ScrollView>
-)
-
-const ControlButton = ({ status }) => {
-     if (status === undefined)
-          return (
-               <Button
-                    onPress={() => AlertMenu()}
-                    buttonStyle={styles.buttonLayer}
-                    containerStyle={styles.controlButton}
-                    title="เช๊คชื่อ"
-               />
-          )
-     const color = { backgroundColor: status ? "#790105" : "#0D631F" }
-     return (
-          <Button
-               onPress={() => AlertMenu()}
-               buttonStyle={{ ...styles.buttonLayer, ...color }}
-               containerStyle={styles.controlButton}
-               title={status ? "ขาด" : "มา"}
-          />
-     )
-}
-
-const AlertMenu = () =>
-     Alert.alert(
-          "เปลี่ยนสถานะมา/ขาด",
-          "กรุณาเลือกสถานะใหม่",
-          [
-               {
-                    text: "ขาด",
-                    onPress: () => console.log("OK Pressed")
-               },
-               {
-                    text: "มา",
-                    onPress: () => console.log("Cancel Pressed")
-               }
-          ],
-          { cancelable: false }
-     )
 
 /*
 rightIcon={{
