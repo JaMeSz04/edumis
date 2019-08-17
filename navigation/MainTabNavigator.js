@@ -1,78 +1,92 @@
-import React from 'react';
-import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import React from "react"
+import { Platform } from "react-native"
+import {
+     createStackNavigator,
+     createBottomTabNavigator
+} from "react-navigation"
 
-import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import TabBarIcon from "../components/TabBarIcon"
+import SettingsScreen from "../screens/SettingsScreen"
+import CalendarScreen from "../screens/CalendarScreen"
+import StudentlistScreen from "../screens/StudentlistScreen"
+import DriverScreen from "../screens/DriverScreen"
+import StudentScreen from "../screens/StudentScreen"
 
 const config = Platform.select({
-  web: { headerMode: 'screen' },
-  default: {},
-});
+     web: { headerMode: "screen" },
+     default: {}
+})
 
-const HomeStack = createStackNavigator(
-  {
-    Home: HomeScreen,
-  },
-  config
-);
+CalendarStack = createStackNavigator({
+     calendar: CalendarScreen
+})
 
-HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
-    />
-  ),
-};
+DriverStack = createStackNavigator({
+     driverList: DriverScreen
+})
 
-HomeStack.path = '';
+StudentListStack = createStackNavigator({
+     studentList: StudentScreen
+})
 
-const LinksStack = createStackNavigator(
-  {
-    Links: LinksScreen,
-  },
-  config
-);
+CalendarStack.navigationOptions = {
+     tabBarLabel: "ตารางสอน",
+     tabBarIcon: ({ focused }) => (
+          <TabBarIcon
+               focused={focused}
+               name={Platform.OS === "ios" ? "ios-calendar" : "md-calendar"}
+          />
+     )
+}
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
-  ),
-};
+StudentListStack.navigationOptions = {
+     tabBarLabel: "รายชื่อนักเรียน",
+     tabBarIcon: ({ focused }) => (
+          <TabBarIcon
+               focused={focused}
+               name={Platform.OS === "ios" ? "ios-people" : "md-people"}
+          />
+     )
+}
 
-LinksStack.path = '';
+DriverStack.navigationOptions = {
+     tabBarLabel: "รถรับส่งนักเรียน",
+     tabBarIcon: ({ focused }) => (
+          <TabBarIcon
+               focused={focused}
+               name={Platform.OS === "ios" ? "ios-bus" : "md-bus"}
+          />
+     )
+}
 
 const SettingsStack = createStackNavigator(
-  {
-    Settings: SettingsScreen,
-  },
-  config
-);
+     {
+          Settings: SettingsScreen
+     },
+     config
+)
 
 SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
-  ),
-};
+     tabBarLabel: "ตั้งค่า",
+     tabBarIcon: ({ focused }) => (
+          <TabBarIcon
+               focused={focused}
+               name={Platform.OS === "ios" ? "ios-options" : "md-options"}
+          />
+     )
+}
 
-SettingsStack.path = '';
+SettingsStack.path = ""
 
-const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
-});
+const teacherNavigator = {
+     StudentListStack,
+     CalendarStack,
+     DriverStack,
+     SettingsStack
+}
 
-tabNavigator.path = '';
+const tabNavigator = createBottomTabNavigator(teacherNavigator)
 
-export default tabNavigator;
+tabNavigator.path = ""
+
+export default tabNavigator

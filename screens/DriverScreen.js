@@ -1,27 +1,20 @@
 import React from "react"
 import { ScrollView, StyleSheet } from "react-native"
-import ListView from "../components/listView"
+import { ExpoLinksView } from "@expo/samples"
 
-const data = [
-     {
-          title: "Appointments",
-          icon: "av-timer"
-     },
-     {
-          title: "Trips",
-          icon: "flight-takeoff"
-     }
-]
-
-export default (StudentListScreen = () => {
+export default DriverScreen = () => {
      return (
           <ScrollView style={styles.container}>
-               <ListView data={data} />
+               {/**
+                * Go ahead and delete ExpoLinksView and replace it with your content;
+                * we just wanted to provide you with some helpful links.
+                */}
+               <ExpoLinksView />
           </ScrollView>
      )
-})
+}
 
-StudentListScreen.navigationOptions = {
+DriverScreen.navigationOptions = {
      title: "รถรับส่งนักเรียน"
 }
 

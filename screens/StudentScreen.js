@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Component } from "react"
 import { ScrollView, StyleSheet } from "react-native"
 import ListView from "../components/listView"
 
@@ -13,7 +13,7 @@ const data = [
      }
 ]
 
-export default (StudentListScreen = () => {
+export default (StudentScreen = () => {
      return (
           <ScrollView style={styles.container}>
                <ListView data={data} />
@@ -21,8 +21,8 @@ export default (StudentListScreen = () => {
      )
 })
 
-StudentListScreen.navigationOptions = {
-     title: "รถรับส่งนักเรียน"
+StudentScreen.navigationOptions = {
+     title: "รายชื่อนักเรียน"
 }
 
 const styles = StyleSheet.create({
