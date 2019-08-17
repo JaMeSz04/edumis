@@ -86,7 +86,7 @@ const dataStyle = [
      ["#000000", "#EB5757"]
 ]
 
-export default (TeacherAgendaScreen = () => {
+export default (AgendaScreen = () => {
      return (
           <ScrollView style={styles.container}>
                {Object.keys(data).map((day, i) => (
@@ -124,7 +124,7 @@ export default (TeacherAgendaScreen = () => {
      )
 })
 
-TeacherAgendaScreen.navigationOptions = {
+AgendaScreen.navigationOptions = {
      title: "ตารางสอน"
 }
 
