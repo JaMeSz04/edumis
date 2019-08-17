@@ -7,8 +7,7 @@ import {
 
 import TabBarIcon from "../components/TabBarIcon"
 import SettingsScreen from "../screens/SettingsScreen"
-import CalendarScreen from "../screens/CalendarScreen"
-import StudentlistScreen from "../screens/StudentlistScreen"
+import AgendaScreen from "../screens/AgendaScreen"
 import DriverScreen from "../screens/DriverScreen"
 import StudentScreen from "../screens/StudentScreen"
 
@@ -17,8 +16,8 @@ const config = Platform.select({
      default: {}
 })
 
-CalendarStack = createStackNavigator({
-     calendar: CalendarScreen
+TeacherAgendaStack = createStackNavigator({
+     agenda: AgendaScreen
 })
 
 DriverStack = createStackNavigator({
@@ -29,7 +28,7 @@ StudentListStack = createStackNavigator({
      studentList: StudentScreen
 })
 
-CalendarStack.navigationOptions = {
+TeacherAgendaStack.navigationOptions = {
      tabBarLabel: "ตารางสอน",
      tabBarIcon: ({ focused }) => (
           <TabBarIcon
@@ -80,7 +79,7 @@ SettingsStack.path = ""
 
 const teacherNavigator = {
      StudentListStack,
-     CalendarStack,
+     TeacherAgendaStack,
      DriverStack,
      SettingsStack
 }
