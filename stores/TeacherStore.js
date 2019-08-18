@@ -5,6 +5,7 @@ class TeacherStore {
      @observable attendanceStudentList = mockStudentList
      @observable teacherAgenda = mockTeacherAgenda
      @observable driverList = mockDriver
+     @observable courseData = mockStudentCourseData
      constructor() {}
 
      @action updateAttendance = (key, value) => {
@@ -226,5 +227,50 @@ const mockDriver = [
           subtitle: "ป 2/5",
           statusMessage: "ส่งเวลา 15:00",
           absent: false
+     }
+]
+
+const mockStudentCourseData = [
+     {
+          title: "Amy Farha",
+          avatar:
+               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+          subtitle: "ป 2/5 เลขที่ 22"
+     },
+     {
+          title: "Amy Farha",
+          avatar:
+               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+          subtitle: "ป 2/5 เลขที่ 22"
+     },
+     {
+          title: "Amy Farha",
+          avatar:
+               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+          subtitle: "ป 2/5 เลขที่ 22"
+     },
+     {
+          title: "Amy Farha",
+          avatar:
+               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+          subtitle: "ป 2/5 เลขที่ 22"
+     },
+     {
+          title: "Amy Farha",
+          avatar:
+               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+          subtitle: "ป 2/5 เลขที่ 22"
+     },
+     {
+          title: "Amy Farha",
+          avatar:
+               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+          subtitle: "ป 2/5 เลขที่ 22"
+     },
+     {
+          title: "Amy Farha",
+          avatar:
+               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+          subtitle: "ป 2/5 เลขที่ 22"
      }
 ]
