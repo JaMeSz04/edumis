@@ -2,18 +2,26 @@ import React from "react"
 import { ListItem, Button } from "react-native-elements"
 import { View, ScrollView, StyleSheet, Alert } from "react-native"
 
-export default (StudentListView = ({ data, title, choices, controlled }) => (
+export default (StudentListView = ({
+     data,
+     title,
+     choices,
+     controlled,
+     disable
+}) => (
      <ScrollView>
           {data.map((item, i) => (
                <ListItem
                     key={i}
                     title={item.title}
                     subtitle={
-                         item.subtitle +
-                         " " +
-                         (item.statusMessage === undefined
-                              ? ""
-                              : item.statusMessage)
+                         item.subtitle
+                              ? item.subtitle
+                              : "" +
+                                " " +
+                                (item.statusMessage === undefined
+                                     ? ""
+                                     : item.statusMessage)
                     }
                     leftAvatar={{ source: { uri: item.avatar } }}
                     rightElement={() =>
@@ -22,6 +30,7 @@ export default (StudentListView = ({ data, title, choices, controlled }) => (
                                    title={title}
                                    choices={choices}
                                    status={item.absent}
+                                   disable={disable}
                               />
                          ) : (
                               <View />
@@ -32,7 +41,7 @@ export default (StudentListView = ({ data, title, choices, controlled }) => (
      </ScrollView>
 ))
 
-const ControlButton = ({ status, title, choices }) => {
+const ControlButton = ({ status, title, choices, disable }) => {
      if (status === undefined)
           return (
                <Button
@@ -43,14 +52,23 @@ const ControlButton = ({ status, title, choices }) => {
                />
           )
      const color = { backgroundColor: status ? "#790105" : "#0D631F" }
-     return (
-          <Button
-               onPress={() => AlertMenu(choices)}
-               buttonStyle={{ ...styles.buttonLayer, ...color }}
-               containerStyle={styles.controlButton}
-               title={status ? choices[0] : choices[1]}
-          />
-     )
+     if (disable)
+          return (
+               <Button
+                    buttonStyle={{ ...styles.buttonLayer, ...color }}
+                    containerStyle={styles.controlButton}
+                    title={status ? choices[0] : choices[1]}
+               />
+          )
+     else
+          return (
+               <Button
+                    onPress={() => AlertMenu(choices)}
+                    buttonStyle={{ ...styles.buttonLayer, ...color }}
+                    containerStyle={styles.controlButton}
+                    title={status ? choices[0] : choices[1]}
+               />
+          )
 }
 
 const AlertMenu = choices =>

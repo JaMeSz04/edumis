@@ -62,7 +62,7 @@ ProfileScreen.navigationOptions = {
 }
 const styles = StyleSheet.create({
      header: {
-          backgroundColor: "#00BFFF",
+          backgroundColor: "#4286f4",
           height: 200
      },
      avatar: {
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
      },
      info: {
           fontSize: 16,
-          color: "#00BFFF",
+          color: "#4286f4",
           marginTop: 6
      },
      description: {
