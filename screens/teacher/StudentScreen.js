@@ -1,25 +1,35 @@
 import React, { Component } from "react"
-import { ScrollView, StyleSheet, Alert } from "react-native"
+import { ScrollView, StyleSheet, Text } from "react-native"
 import StudentListView from "../../components/StudentListView"
+import { inject, observer, Observer } from "mobx-react"
 
-export default (StudentScreen = () => {
-     return (
-          <ScrollView style={styles.container}>
-               <StudentListView
-                    data={data}
-                    title={"เช๊คชื่อ"}
-                    choices={["มา", "ขาด"]}
-                    controlled
-               />
-          </ScrollView>
-     )
-})
-
-/*
-rightIcon={{
-                         name: item.absent ? "visibility-off" : "done"
-                    }}
-*/
+@inject("teacherStore")
+@observer
+export default class StudentScreen extends Component {
+     constructor(props) {
+          super(props)
+     }
+     render() {
+          const {
+               attendanceStudentList,
+               updateAttendance
+          } = this.props.teacherStore
+          return (
+               <ScrollView style={styles.container}>
+                    <StudentListView
+                         data={attendanceStudentList}
+                         title={"เช๊คชื่อ"}
+                         choices={["ขาด", "มา"]}
+                         controlled
+                         onChange={(key, value) => {
+                              updateAttendance(key, value)
+                              this.forceUpdate()
+                         }}
+                    />
+               </ScrollView>
+          )
+     }
+}
 
 StudentScreen.navigationOptions = {
      title: "รายชื่อนักเรียน"
@@ -38,90 +48,3 @@ const styles = StyleSheet.create({
           borderRadius: 15
      }
 })
-
-const data = [
-     {
-          title: "Amy Farha",
-          avatar:
-               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-          subtitle: "เลขที่ 1",
-          absent: undefined
-     },
-     {
-          title: "Amy Farha",
-          avatar:
-               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-          subtitle: "เลขที่ 1",
-          absent: true
-     },
-     {
-          title: "Amy Farha",
-          avatar:
-               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-          subtitle: "เลขที่ 1",
-          absent: false
-     },
-     {
-          title: "Amy Farha",
-          avatar:
-               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-          subtitle: "เลขที่ 1",
-          absent: true
-     },
-     {
-          title: "Amy Farha",
-          avatar:
-               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-          subtitle: "เลขที่ 1",
-          absent: false
-     },
-     {
-          title: "Amy Farha",
-          avatar:
-               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-          subtitle: "เลขที่ 1",
-          absent: false
-     },
-     {
-          title: "Amy Farha",
-          avatar:
-               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-          subtitle: "เลขที่ 1",
-          absent: false
-     },
-     {
-          title: "Amy Farha",
-          avatar:
-               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-          subtitle: "เลขที่ 1",
-          absent: false
-     },
-     {
-          title: "Amy Farha",
-          avatar:
-               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-          subtitle: "เลขที่ 1",
-          absent: false
-     },
-     {
-          title: "Amy Farha",
-          avatar:
-               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-          subtitle: "เลขที่ 1",
-          absent: false
-     },
-     {
-          title: "Amy Farha",
-          avatar:
-               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-          subtitle: "เลขที่ 1",
-          absent: false
-     },
-     {
-          title: "Amy Farha",
-          avatar:
-               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-          subtitle: "เลขที่ 1",
-          absent: false
-     }
-]

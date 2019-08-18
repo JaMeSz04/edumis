@@ -1,19 +1,28 @@
 import React from "react"
 import { ScrollView, StyleSheet } from "react-native"
+import { inject, observer } from "mobx-react"
 
-export default (DriverScreen = () => {
-     return (
-          <ScrollView style={styles.container}>
-               <StudentListView
-                    data={data}
-                    title={"แจ้ง"}
-                    choices={["รับ", "ส่ง"]}
-                    controlled
-               />
-          </ScrollView>
-     )
-})
-
+@inject("teacherStore")
+@observer
+export default class DriverScreen extends React.Component {
+     render() {
+          const { driverList, updateDriverStatus } = this.props.teacherStore
+          return (
+               <ScrollView style={styles.container}>
+                    <StudentListView
+                         data={driverList}
+                         title={"แจ้ง"}
+                         choices={["รับ", "ส่ง"]}
+                         controlled
+                         onChange={(key, value) => {
+                              updateDriverStatus(key, value)
+                              this.forceUpdate()
+                         }}
+                    />
+               </ScrollView>
+          )
+     }
+}
 DriverScreen.navigationOptions = {
      title: "รถรับส่งนักเรียน"
 }
@@ -25,44 +34,3 @@ const styles = StyleSheet.create({
           backgroundColor: "#fff"
      }
 })
-
-const data = [
-     {
-          title: "Amy Farha",
-          avatar:
-               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-          subtitle: "ป 2/5",
-          statusMessage: "ส่งเวลา 15:00",
-          absent: undefined
-     },
-     {
-          title: "Amy Farha",
-          avatar:
-               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-          subtitle: "ป 2/5",
-          absent: true
-     },
-     {
-          title: "Amy Farha",
-          avatar:
-               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-          subtitle: "ป 2/5",
-          absent: true
-     },
-     {
-          title: "Amy Farha",
-          avatar:
-               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-          subtitle: "ป 2/5",
-          statusMessage: "ส่งเวลา 15:00",
-          absent: false
-     },
-     {
-          title: "Amy Farha",
-          avatar:
-               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-          subtitle: "ป 2/5",
-          statusMessage: "ส่งเวลา 15:00",
-          absent: false
-     }
-]

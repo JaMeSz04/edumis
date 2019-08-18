@@ -74,28 +74,10 @@ DriverStack.navigationOptions = {
      )
 }
 
-const SettingsStack = createStackNavigator(
-     {
-          Settings: SettingsScreen
-     },
-     config
-)
-
-SettingsStack.navigationOptions = {
-     tabBarLabel: "ตั้งค่า",
-     tabBarIcon: ({ focused }) => (
-          <TabBarIcon
-               focused={focused}
-               name={Platform.OS === "ios" ? "ios-options" : "md-options"}
-          />
-     )
-}
-
 const teacherNavigator = {
      StudentListStack,
      TeacherAgendaStack,
-     DriverStack,
-     SettingsStack
+     DriverStack
 }
 
 const subjectNavigator = {

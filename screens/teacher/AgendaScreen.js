@@ -8,121 +8,50 @@ import {
      Agenda,
      LocaleConfig
 } from "react-native-calendars"
+import { inject, observer } from "mobx-react"
 
-const data = {
-     จันทร์: [
-          {
-               title: "Science",
-               subtitle: "Prof. John Doe",
-               time: "18:00-19:00"
-          },
-          {
-               title: "Mathematics",
-               subtitle: "Prof. John Doe",
-               time: "18:00-19:00"
-          }
-     ],
-     อังคาร: [
-          {
-               title: "Mathematics",
-               subtitle: "Prof. John Doe",
-               time: "18:00-19:00"
-          }
-     ],
-     พุธ: [
-          {
-               title: "Mathematics",
-               subtitle: "Prof. John Doe",
-               time: "18:00-19:00"
-          },
-          {
-               title: "Science",
-               subtitle: "Prof. John Doe",
-               time: "18:00-19:00"
-          }
-     ],
-     พฤหัสบดี: [
-          {
-               title: "Mathematics",
-               subtitle: "Prof. John Doe",
-               time: "18:00-19:00"
-          }
-     ],
-     ศุกร์: [
-          {
-               title: "Mathematics",
-               subtitle: "Prof. John Doe",
-               time: "18:00-19:00"
-          },
-          {
-               title: "Science",
-               subtitle: "Prof. John Doe",
-               time: "18:00-19:00"
-          }
-     ],
-     เสาร์: [
-          {
-               title: "Mathematics",
-               subtitle: "Prof. John Doe",
-               time: "18:00-19:00"
-          }
-     ],
-     อาทิตย์: [
-          {
-               title: "Mathematics",
-               subtitle: "Prof. John Doe",
-               time: "18:00-19:00"
-          }
-     ]
-}
-
-const dataStyle = [
-     ["#FFD200", "#F7971E"],
-     ["#493240", "#FF0099"],
-     ["#38ef7d", "#11998e"],
-     ["#f7b733", "#fc4a1a"],
-     ["#36D1DC", "#5B86E5"],
-     ["#948E99", "#2E1437"],
-     ["#000000", "#EB5757"]
-]
-
-export default (AgendaScreen = () => {
-     return (
-          <ScrollView style={styles.container}>
-               {Object.keys(data).map((day, i) => (
-                    <View style={styles.agendaContainer} key={i}>
-                         <Text style={styles.dayText}> {day} </Text>
-                         <View>
-                              {data[day].map((agenda, j) => (
-                                   <ListItem
-                                        containerStyle={styles.listItemStyle}
-                                        key={j}
-                                        Component={TouchableScale}
-                                        friction={90}
-                                        tension={100}
-                                        activeScale={0.95}
-                                        linearGradientProps={{
-                                             colors: dataStyle[i],
-                                             start: [1, 0],
-                                             end: [0.2, 0]
-                                        }}
-                                        leftIcon={{ name: "assignment" }}
-                                        title={agenda.title}
-                                        titleStyle={{
-                                             color: "white",
-                                             fontWeight: "bold"
-                                        }}
-                                        subtitleStyle={{ color: "white" }}
-                                        subtitle={agenda.time}
-                                   />
-                              ))}
+export default (AgendaScreen = inject("teacherStore")(
+     observer(props => {
+          const { teacherAgenda } = props.teacherStore
+          return (
+               <ScrollView style={styles.container}>
+                    {Object.keys(teacherAgenda).map((day, i) => (
+                         <View style={styles.agendaContainer} key={i}>
+                              <Text style={styles.dayText}> {day} </Text>
+                              <View>
+                                   {teacherAgenda[day].map((agenda, j) => (
+                                        <ListItem
+                                             containerStyle={
+                                                  styles.listItemStyle
+                                             }
+                                             key={j}
+                                             Component={TouchableScale}
+                                             friction={90}
+                                             tension={100}
+                                             activeScale={0.95}
+                                             linearGradientProps={{
+                                                  colors: dataStyle[i],
+                                                  start: [1, 0],
+                                                  end: [0.2, 0]
+                                             }}
+                                             leftIcon={{ name: "assignment" }}
+                                             title={agenda.title}
+                                             titleStyle={{
+                                                  color: "white",
+                                                  fontWeight: "bold"
+                                             }}
+                                             subtitleStyle={{ color: "white" }}
+                                             subtitle={agenda.time}
+                                        />
+                                   ))}
+                              </View>
                          </View>
-                    </View>
-               ))}
-               <View />
-          </ScrollView>
-     )
-})
+                    ))}
+                    <View />
+               </ScrollView>
+          )
+     })
+))
 
 AgendaScreen.navigationOptions = {
      title: "ตารางสอน"
@@ -162,6 +91,16 @@ const styles = StyleSheet.create({
           backgroundColor: "#fff"
      }
 })
+
+const dataStyle = [
+     ["#FFD200", "#F7971E"],
+     ["#493240", "#FF0099"],
+     ["#38ef7d", "#11998e"],
+     ["#f7b733", "#fc4a1a"],
+     ["#36D1DC", "#5B86E5"],
+     ["#948E99", "#2E1437"],
+     ["#000000", "#EB5757"]
+]
 
 LocaleConfig.locales["th"] = {
      monthNames: [
