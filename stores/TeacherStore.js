@@ -1,12 +1,26 @@
-import { observable, action, toJS } from "mobx"
+import { observable, action } from "mobx"
 
 class TeacherStore {
-     @observable test = "hehe"
      @observable attendanceStudentList = mockStudentList
      @observable teacherAgenda = mockTeacherAgenda
      @observable driverList = mockDriver
      @observable courseData = mockStudentCourseData
      constructor() {}
+
+     @action fetchAgenda = () => {
+          //call your api here
+          //teacherAgenda = your data
+     }
+
+     @action fetchDriver = () => {
+          //call your api here
+          //driverList = your data
+     }
+
+     @action fetchStudentCourse = () => {
+          //call your api here
+          //courseData = your data
+     }
 
      @action updateAttendance = (key, value) => {
           //call API here

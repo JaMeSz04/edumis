@@ -2,48 +2,7 @@ import React from "react"
 import { ScrollView, StyleSheet, View, Text } from "react-native"
 import TouchableScale from "react-native-touchable-scale"
 import { ListItem } from "react-native-elements"
-
-const data = [
-     {
-          title: "Science",
-          subtitle: "Prof. John Doe",
-          score: 4
-     },
-     {
-          title: "Mathematics",
-          subtitle: "Prof. John Doe",
-
-          score: 2
-     },
-     {
-          title: "Mathematics",
-          subtitle: "Prof. John Doe",
-
-          score: 1
-     },
-     {
-          title: "Mathematics",
-          subtitle: "Prof. John Doe",
-
-          score: "R"
-     },
-     {
-          title: "Science",
-          subtitle: "Prof. John Doe",
-          score: 4
-     },
-     {
-          title: "Science",
-          subtitle: "Prof. John Doe",
-          score: 4
-     },
-     {
-          title: "Mathematics",
-          subtitle: "Prof. John Doe",
-
-          score: 2
-     }
-]
+import { inject, observer } from "mobx-react"
 
 const dataStyle = [
      ["#FFD200", "#F7971E"],
@@ -51,43 +10,52 @@ const dataStyle = [
      ["#EB5757", "#000000"]
 ]
 
-export default (GradeScreen = () => {
-     return (
-          <ScrollView style={styles.container}>
-               <View style={styles.agendaContainer}>
-                    {data.map((element, i) => (
-                         <ListItem
-                              containerStyle={styles.listItemStyle}
-                              key={i}
-                              Component={TouchableScale}
-                              friction={90}
-                              tension={100}
-                              activeScale={0.95}
-                              linearGradientProps={{
-                                   colors: getColorScheme(element.score),
-                                   start: [1, 0],
-                                   end: [0.2, 0]
-                              }}
-                              leftIcon={{ name: "assignment" }}
-                              title={element.title}
-                              titleStyle={{
-                                   color: "white",
-                                   fontWeight: "bold"
-                              }}
-                              rightElement={() => (
-                                   <Text style={styles.scoreStyle}>
-                                        {element.score}
-                                   </Text>
-                              )}
-                              subtitleStyle={{ color: "white" }}
-                              subtitle={element.subtitle}
-                         />
-                    ))}
-               </View>
-               <View />
-          </ScrollView>
-     )
-})
+@inject("parentStore")
+@observer
+export default class GradeScreen extends React.Component {
+     componentDidMount() {
+          const { fetchStudentGrade } = this.props.parentStore
+          fetchStudentGrade()
+     }
+     render() {
+          const { studentGrade } = this.props.parentStore
+          return (
+               <ScrollView style={styles.container}>
+                    <View style={styles.agendaContainer}>
+                         {studentGrade.map((element, i) => (
+                              <ListItem
+                                   containerStyle={styles.listItemStyle}
+                                   key={i}
+                                   Component={TouchableScale}
+                                   friction={90}
+                                   tension={100}
+                                   activeScale={0.95}
+                                   linearGradientProps={{
+                                        colors: getColorScheme(element.score),
+                                        start: [1, 0],
+                                        end: [0.2, 0]
+                                   }}
+                                   leftIcon={{ name: "assignment" }}
+                                   title={element.title}
+                                   titleStyle={{
+                                        color: "white",
+                                        fontWeight: "bold"
+                                   }}
+                                   rightElement={() => (
+                                        <Text style={styles.scoreStyle}>
+                                             {element.score}
+                                        </Text>
+                                   )}
+                                   subtitleStyle={{ color: "white" }}
+                                   subtitle={element.subtitle}
+                              />
+                         ))}
+                    </View>
+                    <View />
+               </ScrollView>
+          )
+     }
+}
 
 const getColorScheme = score => {
      if (score >= 3) return dataStyle[1]
