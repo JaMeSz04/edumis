@@ -8,6 +8,7 @@ import { Provider } from "mobx-react"
 
 import AppNavigator from "./navigation/AppNavigator"
 import TeacherStore from "./stores/TeacherStore"
+import ParentStore from "./stores/ParentStore"
 
 export default function App(props) {
      const [isLoadingComplete, setLoadingComplete] = useState(false)
@@ -24,7 +25,10 @@ export default function App(props) {
           return (
                <View style={styles.container}>
                     {Platform.OS === "ios" && <StatusBar barStyle="default" />}
-                    <Provider teacherStore={TeacherStore}>
+                    <Provider
+                         teacherStore={TeacherStore}
+                         parentStore={ParentStore}
+                    >
                          <AppNavigator />
                     </Provider>
                </View>

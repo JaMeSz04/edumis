@@ -93,4 +93,9 @@ const stackNavigator = {
 
 const tabNavigator = createBottomTabNavigator(stackNavigator)
 
-export default tabNavigator
+const drawer = {
+     Student: tabNavigator
+}
+const navigator = createDrawerNavigator(drawer)
+
+export default navigator
