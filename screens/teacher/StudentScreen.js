@@ -9,6 +9,10 @@ export default class StudentScreen extends Component {
      constructor(props) {
           super(props)
      }
+     componentDidMount() {
+          const { fetchAttendance } = this.props.teacherStore
+          fetchAttendance()
+     }
      render() {
           const {
                attendanceStudentList,

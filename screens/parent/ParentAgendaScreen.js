@@ -2,12 +2,6 @@ import React from "react"
 import { ScrollView, StyleSheet, View, Text } from "react-native"
 import TouchableScale from "react-native-touchable-scale"
 import { ListItem } from "react-native-elements"
-import {
-     Calendar,
-     CalendarList,
-     Agenda,
-     LocaleConfig
-} from "react-native-calendars"
 import { inject, observer } from "mobx-react"
 
 @inject("parentStore")
@@ -107,47 +101,3 @@ const dataStyle = [
      ["#948E99", "#2E1437"],
      ["#000000", "#EB5757"]
 ]
-
-LocaleConfig.locales["th"] = {
-     monthNames: [
-          "มกราคม",
-          "กุมพาพันธ์",
-          "มีนาคม",
-          "เมษายน",
-          "พฤษภาคม",
-          "มิถุนายน",
-          "กรกฎาคม",
-          "สิงหาคม",
-          "กันยายน",
-          "ตุลาคม",
-          "พฤษจิกายน",
-          "ธันวาคม"
-     ],
-     monthNamesShort: [
-          "มก",
-          "กุม",
-          "มีนา",
-          "เมษา",
-          "พฤษ",
-          "มิถุ",
-          "กรกฎา.",
-          "สิงหา",
-          "กันยา.",
-          "ตุลา.",
-          "พฤษ.",
-          "ธันวา"
-     ],
-     dayNames: [
-          "จันทร์",
-          "อังคาร",
-          "พุธ",
-          "พฤหัสบดี",
-          "ศุกร์",
-          "เสาร์",
-          "อาทิตย์"
-     ],
-     dayNamesShort: ["จ.", "อ.", "พ.", "พฤ.", "ศ.", "ส.", "อา."],
-     today: "วันนี้"
-}
-
-LocaleConfig.defaultLocale = "th"

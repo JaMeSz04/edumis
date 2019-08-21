@@ -12,6 +12,8 @@ import AgendaScreen from "../screens/teacher/AgendaScreen"
 import DriverScreen from "../screens/teacher/DriverScreen"
 import StudentScreen from "../screens/teacher/StudentScreen"
 import CourseStudentScreen from "../screens/teacher/CourseStudentScreen"
+import SchoolCalendar from "../screens/SchoolCalendar"
+import NotificationScreen from "../screens/NotificationScreen"
 
 const config = Platform.select({
      web: { headerMode: "screen" },
@@ -32,6 +34,14 @@ StudentListStack = createStackNavigator({
 
 CourseStudentStack = createStackNavigator({
      courseStudent: CourseStudentScreen
+})
+
+NotificationStack = createStackNavigator({
+     notification: NotificationScreen
+})
+
+SchoolCalendarStack = createStackNavigator({
+     calendar: SchoolCalendar
 })
 
 CourseStudentStack.navigationOptions = {
@@ -74,6 +84,14 @@ DriverStack.navigationOptions = {
      )
 }
 
+NotificationStack.navigationOptions = {
+     drawerLabel: "ประกาศ"
+}
+
+SchoolCalendarStack.navigationOptions = {
+     drawerLabel: "ปฏิทินโรงเรียน"
+}
+
 const teacherNavigator = {
      StudentListStack,
      TeacherAgendaStack,
@@ -97,7 +115,9 @@ TeacherTabNavigator.navigationOptions = {
 
 const drawer = {
      Teacher: TeacherTabNavigator,
-     Course: CourseTabNavigator
+     Course: CourseTabNavigator,
+     Calendar: SchoolCalendarStack,
+     Notification: NotificationStack
 }
 const navigator = createDrawerNavigator(drawer)
 

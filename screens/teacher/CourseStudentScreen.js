@@ -2,16 +2,22 @@ import React from "react"
 import { ScrollView, StyleSheet } from "react-native"
 import { inject, observer } from "mobx-react"
 
-export default (CourseStudentScreen = inject("teacherStore")(
-     observer(props => {
-          const { courseData } = props.teacherStore
+@inject("teacherStore")
+@observer
+export default class CourseStudentScreen extends React.Component {
+     componentDidMount() {
+          const { fetchStudentCourse } = this.props.teacherStore
+          fetchStudentCourse()
+     }
+     render() {
+          const { courseData } = this.props.teacherStore
           return (
                <ScrollView style={styles.container}>
                     <StudentListView data={courseData} />
                </ScrollView>
           )
-     })
-))
+     }
+}
 
 CourseStudentScreen.navigationOptions = {
      title: "รายชื่อนักเรียนรายวิชา"

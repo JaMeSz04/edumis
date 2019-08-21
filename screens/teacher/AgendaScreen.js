@@ -10,9 +10,15 @@ import {
 } from "react-native-calendars"
 import { inject, observer } from "mobx-react"
 
-export default (AgendaScreen = inject("teacherStore")(
-     observer(props => {
-          const { teacherAgenda } = props.teacherStore
+@inject("teacherStore")
+@observer
+export default class AgendaScreen extends React.Component {
+     componentDidMount() {
+          const { fetchAgenda } = this.props.teacherStore
+          fetchAgenda()
+     }
+     render() {
+          const { teacherAgenda } = this.props.teacherStore
           return (
                <ScrollView style={styles.container}>
                     {Object.keys(teacherAgenda).map((day, i) => (
@@ -50,8 +56,8 @@ export default (AgendaScreen = inject("teacherStore")(
                     <View />
                </ScrollView>
           )
-     })
-))
+     }
+}
 
 AgendaScreen.navigationOptions = {
      title: "ตารางสอน"

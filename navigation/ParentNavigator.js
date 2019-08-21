@@ -12,6 +12,8 @@ import HomeworkScreen from "../screens/parent/HomeworkScreen"
 import GradeScreen from "../screens/parent/GradeScreen"
 import AttandanceScreen from "../screens/parent/AttendanceScreen"
 import ParentAgendaScreen from "../screens/parent/ParentAgendaScreen"
+import SchoolCalendar from "../screens/SchoolCalendar"
+import NotificationScreen from "../screens/NotificationScreen"
 
 ProfileStack = createStackNavigator({
      profile: ProfileScreen
@@ -31,6 +33,14 @@ GradeStack = createStackNavigator({
 
 AttendanceStack = createStackNavigator({
      attendance: AttandanceScreen
+})
+
+NotificationStack = createStackNavigator({
+     notification: NotificationScreen
+})
+
+SchoolCalendarStack = createStackNavigator({
+     calendar: SchoolCalendar
 })
 
 ParentAgendaStack.navigationOptions = {
@@ -83,6 +93,14 @@ AttendanceStack.navigationOptions = {
      )
 }
 
+NotificationStack.navigationOptions = {
+     drawerLabel: "ประกาศ"
+}
+
+SchoolCalendarStack.navigationOptions = {
+     drawerLabel: "ปฏิทินโรงเรียน"
+}
+
 const stackNavigator = {
      ProfileStack,
      ParentAgendaStack,
@@ -94,8 +112,11 @@ const stackNavigator = {
 const tabNavigator = createBottomTabNavigator(stackNavigator)
 
 const drawer = {
-     Student: tabNavigator
+     Student: tabNavigator,
+     Calendar: SchoolCalendarStack,
+     Notification: NotificationStack
 }
+
 const navigator = createDrawerNavigator(drawer)
 
 export default navigator

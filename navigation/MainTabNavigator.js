@@ -1,10 +1,13 @@
 import React from "react"
 import ParentNavigator from "./ParentNavigator"
 import TeacherNavigator from "./TeacherNavigator"
+import { createStackNavigator } from "react-navigation"
 
-const value = "parent"
+const value = "teacher"
 
-const decisionPath = data =>
-     data == "teacher" ? TeacherNavigator : ParentNavigator
+const stack = {
+     teacher: TeacherNavigator,
+     parent: ParentNavigator
+}
 
-export default decisionPath(value)
+export default createStackNavigator(stack)

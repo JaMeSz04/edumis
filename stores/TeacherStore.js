@@ -1,25 +1,34 @@
 import { observable, action } from "mobx"
 
 class TeacherStore {
-     @observable attendanceStudentList = mockStudentList
-     @observable teacherAgenda = mockTeacherAgenda
-     @observable driverList = mockDriver
-     @observable courseData = mockStudentCourseData
+     @observable attendanceStudentList = []
+     @observable teacherAgenda = []
+     @observable driverList = []
+     @observable courseData = []
      constructor() {}
+
+     @action fetchAttendance = () => {
+          //call your api here
+          //attendanceStudentList = your data
+          this.attendanceStudentList = mockStudentList
+     }
 
      @action fetchAgenda = () => {
           //call your api here
           //teacherAgenda = your data
+          this.teacherAgenda = mockTeacherAgenda
      }
 
      @action fetchDriver = () => {
           //call your api here
           //driverList = your data
+          this.driverList = mockDriver
      }
 
      @action fetchStudentCourse = () => {
           //call your api here
           //courseData = your data
+          this.courseData = mockStudentCourseData
      }
 
      @action updateAttendance = (key, value) => {

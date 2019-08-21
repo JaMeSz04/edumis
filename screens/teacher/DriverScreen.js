@@ -5,6 +5,10 @@ import { inject, observer } from "mobx-react"
 @inject("teacherStore")
 @observer
 export default class DriverScreen extends React.Component {
+     componentDidMount() {
+          const { fetchDriver } = this.props.teacherStore
+          fetchDriver()
+     }
      render() {
           const { driverList, updateDriverStatus } = this.props.teacherStore
           return (
