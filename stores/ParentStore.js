@@ -8,6 +8,24 @@ class ParentStore {
 
      constructor() {}
 
+     @computed get currentDate() {
+          let today = new Date()
+          let dd = today.getDate()
+          let mm = today.getMonth() + 1 //January is 0!
+          let yyyy = today.getFullYear() + 543
+
+          if (dd < 10) {
+               dd = "0" + dd
+          }
+
+          if (mm < 10) {
+               mm = "0" + mm
+          }
+
+          today = mm + "/" + dd + "/" + yyyy
+          return today
+     }
+
      @action fetchStudentAgenda = () => {
           //call your api here
           //studentAgenda = your data

@@ -1,4 +1,4 @@
-import { observable, action } from "mobx"
+import { observable, action, computed } from "mobx"
 
 class TeacherStore {
      @observable attendanceStudentList = []
@@ -6,6 +6,24 @@ class TeacherStore {
      @observable driverList = []
      @observable courseData = []
      constructor() {}
+
+     @computed get currentDate() {
+          let today = new Date()
+          let dd = today.getDate()
+          let mm = today.getMonth() + 1 //January is 0!
+          let yyyy = today.getFullYear() + 543
+
+          if (dd < 10) {
+               dd = "0" + dd
+          }
+
+          if (mm < 10) {
+               mm = "0" + mm
+          }
+
+          today = mm + "/" + dd + "/" + yyyy
+          return today
+     }
 
      @action fetchAttendance = () => {
           //call your api here
@@ -33,11 +51,20 @@ class TeacherStore {
 
      @action updateAttendance = (key, value) => {
           //call API here
+
           this.attendanceApiAdapter(value) //change to data from api
           const temp = this.attendanceStudentList
           temp[key].absent = value == "ขาด" ? true : false
           this.attendanceStudentList = temp
      }
+
+     @action updateAllStudents = () => {
+          console.log("updating ")
+          const temp = this.attendanceStudentList
+          temp.forEach(student => (student.absent = false))
+          this.attendanceStudentList = temp
+     }
+
      @action updateDriverStatus = (key, value) => {
           //Call API here
           this.driverApiAdapter(value) //change to data from api

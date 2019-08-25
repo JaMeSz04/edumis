@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
      }
 })
 
-const dataStyle = [
+const dataGradiantStyle = [
      ["#FFD200", "#F7971E"],
      ["#493240", "#FF0099"],
      ["#38ef7d", "#11998e"],
@@ -100,4 +100,13 @@ const dataStyle = [
      ["#36D1DC", "#5B86E5"],
      ["#948E99", "#2E1437"],
      ["#000000", "#EB5757"]
+]
+const dataStyle = [
+     ["#F7971E", "#F7971E"],
+     ["#FF0099", "#FF0099"],
+     ["#11998e", "#11998e"],
+     ["#f7b733", "#f7b733"],
+     ["#36D1DC", "#36D1DC"],
+     ["#2E1437", "#2E1437"],
+     ["#000000", "#000000"]
 ]

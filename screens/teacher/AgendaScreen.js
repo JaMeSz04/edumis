@@ -1,7 +1,7 @@
 import React from "react"
 import { ScrollView, StyleSheet, View, Text } from "react-native"
 import TouchableScale from "react-native-touchable-scale"
-import { ListItem } from "react-native-elements"
+import { ListItem, Avatar, Button } from "react-native-elements"
 import {
      Calendar,
      CalendarList,
@@ -13,54 +13,85 @@ import { inject, observer } from "mobx-react"
 @inject("teacherStore")
 @observer
 export default class AgendaScreen extends React.Component {
+     constructor(props) {
+          super(props)
+          this.state = {
+               selectedDate: "จันทร์"
+          }
+     }
+
      componentDidMount() {
           const { fetchAgenda } = this.props.teacherStore
           fetchAgenda()
      }
      render() {
           const { teacherAgenda } = this.props.teacherStore
+          const returnVal =
+               teacherAgenda.length === 0 ? (
+                    <View />
+               ) : (
+                    teacherAgenda[this.state.selectedDate].map((agenda, j) => (
+                         <ListItem
+                              containerStyle={styles.listItemStyle}
+                              key={j}
+                              Component={TouchableScale}
+                              friction={90}
+                              tension={100}
+                              activeScale={0.95}
+                              linearGradientProps={{
+                                   colors:
+                                        dataStyle[
+                                             Object.keys(teacherAgenda).indexOf(
+                                                  this.state.selectedDate
+                                             )
+                                        ],
+                                   start: [1, 0],
+                                   end: [0.2, 0]
+                              }}
+                              leftIcon={{ name: "assignment" }}
+                              title={agenda.title}
+                              titleStyle={{
+                                   color: "white",
+                                   fontWeight: "bold"
+                              }}
+                              subtitleStyle={{ color: "white" }}
+                              subtitle={agenda.time}
+                         />
+                    ))
+               )
+
+          const avatarDay = Object.keys(mapper).map((shortDay, i) => (
+               <Avatar
+                    key={i}
+                    size="medium"
+                    rounded
+                    containerStyle={styles.avatarDate}
+                    onPress={() =>
+                         this.setState({ selectedDate: mapper[shortDay] })
+                    }
+                    title={shortDay}
+               />
+          ))
           return (
                <ScrollView style={styles.container}>
-                    {Object.keys(teacherAgenda).map((day, i) => (
-                         <View style={styles.agendaContainer} key={i}>
-                              <Text style={styles.dayText}> {day} </Text>
-                              <View>
-                                   {teacherAgenda[day].map((agenda, j) => (
-                                        <ListItem
-                                             containerStyle={
-                                                  styles.listItemStyle
-                                             }
-                                             key={j}
-                                             Component={TouchableScale}
-                                             friction={90}
-                                             tension={100}
-                                             activeScale={0.95}
-                                             linearGradientProps={{
-                                                  colors: dataStyle[i],
-                                                  start: [1, 0],
-                                                  end: [0.2, 0]
-                                             }}
-                                             leftIcon={{ name: "assignment" }}
-                                             title={agenda.title}
-                                             titleStyle={{
-                                                  color: "white",
-                                                  fontWeight: "bold"
-                                             }}
-                                             subtitleStyle={{ color: "white" }}
-                                             subtitle={agenda.time}
-                                        />
-                                   ))}
-                              </View>
-                         </View>
-                    ))}
-                    <View />
+                    <View style={styles.dayList}>{avatarDay}</View>
+                    <View style={styles.agendaContainer}>{returnVal}</View>
                </ScrollView>
           )
      }
 }
 
 AgendaScreen.navigationOptions = {
-     title: "ตารางสอน"
+     title: "ตารางสอน",
+     headerRight: null
+}
+
+const mapper = {
+     จ: "จันทร์",
+     อัง: "อังคาร",
+     พ: "พุธ",
+     พฤ: "พฤหัสบดี",
+     ศ: "ศุกร์"
 }
 
 const styles = StyleSheet.create({
@@ -78,12 +109,25 @@ const styles = StyleSheet.create({
      },
      agendaContainer: {
           marginLeft: 16,
-          marginRight: 16
+          marginRight: 16,
+          marginTop: 32
      },
      dayText: {
           marginBottom: 16,
           fontSize: 18,
           fontWeight: "bold"
+     },
+     dayList: {
+          flex: 1,
+          flexDirection: "row",
+          marginLeft: 16,
+          marginRight: 16,
+          marginTop: 16,
+          alignSelf: "center"
+     },
+     avatarDate: {
+          marginLeft: 8,
+          marginRight: 8
      },
      emptyDate: {
           height: 15,
@@ -98,7 +142,7 @@ const styles = StyleSheet.create({
      }
 })
 
-const dataStyle = [
+const dataGradiantStyle = [
      ["#FFD200", "#F7971E"],
      ["#493240", "#FF0099"],
      ["#38ef7d", "#11998e"],
@@ -108,46 +152,12 @@ const dataStyle = [
      ["#000000", "#EB5757"]
 ]
 
-LocaleConfig.locales["th"] = {
-     monthNames: [
-          "มกราคม",
-          "กุมพาพันธ์",
-          "มีนาคม",
-          "เมษายน",
-          "พฤษภาคม",
-          "มิถุนายน",
-          "กรกฎาคม",
-          "สิงหาคม",
-          "กันยายน",
-          "ตุลาคม",
-          "พฤษจิกายน",
-          "ธันวาคม"
-     ],
-     monthNamesShort: [
-          "มก",
-          "กุม",
-          "มีนา",
-          "เมษา",
-          "พฤษ",
-          "มิถุ",
-          "กรกฎา.",
-          "สิงหา",
-          "กันยา.",
-          "ตุลา.",
-          "พฤษ.",
-          "ธันวา"
-     ],
-     dayNames: [
-          "จันทร์",
-          "อังคาร",
-          "พุธ",
-          "พฤหัสบดี",
-          "ศุกร์",
-          "เสาร์",
-          "อาทิตย์"
-     ],
-     dayNamesShort: ["จ.", "อ.", "พ.", "พฤ.", "ศ.", "ส.", "อา."],
-     today: "วันนี้"
-}
-
-LocaleConfig.defaultLocale = "th"
+const dataStyle = [
+     ["#F7971E", "#F7971E"],
+     ["#FF0099", "#FF0099"],
+     ["#11998e", "#11998e"],
+     ["#f7b733", "#f7b733"],
+     ["#36D1DC", "#36D1DC"],
+     ["#2E1437", "#2E1437"],
+     ["#000000", "#000000"]
+]
