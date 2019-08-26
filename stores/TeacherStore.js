@@ -1,4 +1,5 @@
 import { observable, action, computed } from "mobx"
+import Api from "../utils/network"
 
 class TeacherStore {
      @observable attendanceStudentList = []
@@ -27,8 +28,17 @@ class TeacherStore {
 
      @action fetchAttendance = () => {
           //call your api here
+          Api.getAttendanceList(345).then(response => {
+               this.attendanceStudentList = response.data.map(element => ({
+                    title: element.std_full_name,
+                    avatar: element.std_profile_image,
+                    subtitle: element.std_nickname,
+                    absent: "มา"
+               }))
+          })
+
           //attendanceStudentList = your data
-          this.attendanceStudentList = mockStudentList
+          //this.attendanceStudentList = mockStudentList
      }
 
      @action fetchAgenda = () => {
@@ -59,9 +69,9 @@ class TeacherStore {
      }
 
      @action updateAllStudents = () => {
-          console.log("updating ")
+          //call API here
           const temp = this.attendanceStudentList
-          temp.forEach(student => (student.absent = มา))
+          temp.forEach(student => (student.absent = "มา"))
           this.attendanceStudentList = temp
      }
 

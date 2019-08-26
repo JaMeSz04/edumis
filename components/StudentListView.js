@@ -25,37 +25,59 @@ export default StudentListView = ({
                                      ? ""
                                      : item.statusMessage)
                     }
-                    leftAvatar={{ source: { uri: item.avatar } }}
-                    rightElement={() =>
-                         controlled ? (
-                              <ControlButton
-                                   title={title}
-                                   choices={choices}
-                                   status={item.absent}
-                                   disable={disable}
-                                   onChange={data => onChange(i, data)}
-                              />
-                         ) : (
-                              <View />
-                         )
+                    containerStyle={
+                         i % 2 === 0
+                              ? { backgroundColor: "white" }
+                              : { backgroundColor: "lightgray" }
                     }
+                    leftAvatar={{ source: { uri: item.avatar } }}
+                    rightElement={() => (
+                         <View
+                              style={{
+                                   borderRadius: 16,
+                                   borderWidth: 1,
+                                   borderColor: "#bdc3c7",
+                                   overflow: "hidden"
+                              }}
+                         >
+                              {controlled ? (
+                                   <ControlButton
+                                        i={i}
+                                        title={title}
+                                        choices={choices}
+                                        status={item.absent}
+                                        disable={disable}
+                                        onChange={data => onChange(i, data)}
+                                   />
+                              ) : (
+                                   <View />
+                              )}
+                         </View>
+                    )}
                />
           ))}
      </ScrollView>
 )
 
-const ControlButton = ({ status, title, choices, disable, onChange }) => {
+const ControlButton = ({ status, title, choices, disable, onChange, i }) => {
      if (status === undefined)
           return (
                <Picker
                     selectedValue={status}
-                    style={{ width: 130, height: 50 }}
+                    style={{
+                         width: 130,
+                         height: 50,
+                         backgroundColor: colorList[choices.indexOf(status)],
+                         borderRadius: 16,
+                         alignSelf: "center"
+                    }}
                     onValueChange={(itemValue, itemIndex) =>
                          onChange(itemValue)
                     }
                >
                     {choices.map((element, key) => (
                          <Picker.Item
+                              style={{ color: "white" }}
                               key={key}
                               label={element}
                               value={element}
@@ -76,13 +98,20 @@ const ControlButton = ({ status, title, choices, disable, onChange }) => {
           return (
                <Picker
                     selectedValue={status}
-                    style={{ width: 130, height: 50 }}
+                    style={{
+                         width: 130,
+                         height: 50,
+                         backgroundColor: colorList[choices.indexOf(status)],
+                         borderRadius: 16,
+                         alignSelf: "center"
+                    }}
                     onValueChange={(itemValue, itemIndex) =>
                          onChange(itemValue)
                     }
                >
                     {choices.map((element, key) => (
                          <Picker.Item
+                              style={{ color: "white" }}
                               key={key}
                               label={element}
                               value={element}
@@ -91,6 +120,8 @@ const ControlButton = ({ status, title, choices, disable, onChange }) => {
                </Picker>
           )
 }
+
+const colorList = ["#ff6a5a", "#85e21f", "#ff5733", "#ffc300"]
 
 const AlertMenu = (choices, onChange) =>
      Alert.alert(
@@ -119,5 +150,6 @@ const styles = StyleSheet.create({
      },
      buttonLayer: {
           borderRadius: 15
-     }
+     },
+     picker: {}
 })
