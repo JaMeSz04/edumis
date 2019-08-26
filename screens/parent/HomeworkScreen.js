@@ -6,6 +6,12 @@ import { inject, observer } from "mobx-react"
 @inject("parentStore")
 @observer
 export default class HomeworkScreen extends React.Component {
+     static navigationOptions = ({ navigation }) => {
+          return {
+               title: "การบ้านวันที่ " + date
+          }
+     }
+
      componentDidMount() {
           const { fetchHomework } = this.props.parentStore
           fetchHomework()
@@ -34,9 +40,25 @@ export default class HomeworkScreen extends React.Component {
      }
 }
 
-HomeworkScreen.navigationOptions = {
-     title: "การบ้าน"
+const currentDate = () => {
+     let today = new Date()
+     let dd = today.getDate()
+     let mm = today.getMonth() + 1 //January is 0!
+     let yyyy = today.getFullYear() + 543
+
+     if (dd < 10) {
+          dd = "0" + dd
+     }
+
+     if (mm < 10) {
+          mm = "0" + mm
+     }
+
+     today = mm + "/" + dd + "/" + yyyy
+     return today
 }
+
+const date = currentDate()
 
 const styles = StyleSheet.create({
      container: {

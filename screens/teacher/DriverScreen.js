@@ -16,7 +16,12 @@ export default class DriverScreen extends React.Component {
                     <StudentListView
                          data={driverList}
                          title={"แจ้ง"}
-                         choices={["รับ", "ส่ง"]}
+                         choices={[
+                              "รับจากบ้าน",
+                              "ส่งถึงบ้าน",
+                              "รับจากโรงเรียน",
+                              "ส่งถึงโรงเรียน"
+                         ]}
                          controlled
                          onChange={(key, value) => {
                               updateDriverStatus(key, value)

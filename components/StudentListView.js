@@ -1,9 +1,9 @@
 import React from "react"
 import { ListItem, Button } from "react-native-elements"
-import { View, ScrollView, StyleSheet, Alert } from "react-native"
+import { View, ScrollView, StyleSheet, Alert, Picker } from "react-native"
 import { observer } from "mobx-react"
 
-export default (StudentListView = ({
+export default StudentListView = ({
      data,
      title,
      choices,
@@ -42,17 +42,26 @@ export default (StudentListView = ({
                />
           ))}
      </ScrollView>
-))
+)
 
 const ControlButton = ({ status, title, choices, disable, onChange }) => {
      if (status === undefined)
           return (
-               <Button
-                    onPress={() => AlertMenu(choices, onChange)}
-                    buttonStyle={styles.buttonLayer}
-                    containerStyle={styles.controlButton}
-                    title={title}
-               />
+               <Picker
+                    selectedValue={status}
+                    style={{ width: 130, height: 50 }}
+                    onValueChange={(itemValue, itemIndex) =>
+                         onChange(itemValue)
+                    }
+               >
+                    {choices.map((element, key) => (
+                         <Picker.Item
+                              key={key}
+                              label={element}
+                              value={element}
+                         />
+                    ))}
+               </Picker>
           )
      const color = { backgroundColor: status ? "#790105" : "#0D631F" }
      if (disable)
@@ -65,12 +74,21 @@ const ControlButton = ({ status, title, choices, disable, onChange }) => {
           )
      else
           return (
-               <Button
-                    onPress={() => AlertMenu(choices, onChange)}
-                    buttonStyle={{ ...styles.buttonLayer, ...color }}
-                    containerStyle={styles.controlButton}
-                    title={status ? choices[0] : choices[1]}
-               />
+               <Picker
+                    selectedValue={status}
+                    style={{ width: 130, height: 50 }}
+                    onValueChange={(itemValue, itemIndex) =>
+                         onChange(itemValue)
+                    }
+               >
+                    {choices.map((element, key) => (
+                         <Picker.Item
+                              key={key}
+                              label={element}
+                              value={element}
+                         />
+                    ))}
+               </Picker>
           )
 }
 

@@ -4,7 +4,6 @@ import { Icon } from "react-native-elements"
 export default CheckAll = ({ action, update }) => (
      <Icon
           onPress={() => {
-               console.log("test2")
                action()
                update()
           }}

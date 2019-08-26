@@ -54,14 +54,14 @@ class TeacherStore {
 
           this.attendanceApiAdapter(value) //change to data from api
           const temp = this.attendanceStudentList
-          temp[key].absent = value == "ขาด" ? true : false
+          temp[key].absent = value
           this.attendanceStudentList = temp
      }
 
      @action updateAllStudents = () => {
           console.log("updating ")
           const temp = this.attendanceStudentList
-          temp.forEach(student => (student.absent = false))
+          temp.forEach(student => (student.absent = มา))
           this.attendanceStudentList = temp
      }
 
@@ -69,7 +69,7 @@ class TeacherStore {
           //Call API here
           this.driverApiAdapter(value) //change to data from api
           const temp = this.driverList
-          temp[key].absent = value == "รับ" ? true : false
+          temp[key].absent = value
           this.driverList = temp
      }
 

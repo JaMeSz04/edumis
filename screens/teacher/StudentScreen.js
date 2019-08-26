@@ -39,18 +39,13 @@ export default class StudentScreen extends Component {
                     <StudentListView
                          data={attendanceStudentList}
                          title={"เช๊คชื่อ"}
-                         choices={["ขาด", "มา"]}
+                         choices={["ขาด", "มา", "สาย", "ป่วย"]}
                          controlled
                          onChange={(key, value) => {
                               updateAttendance(key, value)
                               this.forceUpdate()
                          }}
                     />
-                    {attendanceStudentList.length === 0 ? (
-                         <Text> ไม่มีรายการ </Text>
-                    ) : (
-                         <View />
-                    )}
                </ScrollView>
           )
      }

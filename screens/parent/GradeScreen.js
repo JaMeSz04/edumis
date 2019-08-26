@@ -5,9 +5,9 @@ import { ListItem } from "react-native-elements"
 import { inject, observer } from "mobx-react"
 
 const dataStyle = [
-     ["#FFD200", "#F7971E"],
-     ["#38ef7d", "#11998e"],
-     ["#EB5757", "#000000"]
+     ["#FFD200", "#FFFFFF"],
+     ["#38ef7d", "#FFFFFF"],
+     ["#EB5757", "#FFFFFF"]
 ]
 
 @inject("parentStore")
@@ -27,18 +27,18 @@ export default class GradeScreen extends React.Component {
                                    containerStyle={styles.listItemStyle}
                                    key={i}
                                    Component={TouchableScale}
-                                   friction={90}
+                                   friction={100}
                                    tension={100}
                                    activeScale={0.95}
                                    linearGradientProps={{
                                         colors: getColorScheme(element.score),
                                         start: [1, 0],
-                                        end: [0.2, 0]
+                                        end: [0.8, 0]
                                    }}
                                    leftIcon={{ name: "assignment" }}
                                    title={element.title}
                                    titleStyle={{
-                                        color: "white",
+                                        color: "black",
                                         fontWeight: "bold"
                                    }}
                                    rightElement={() => (
@@ -46,7 +46,7 @@ export default class GradeScreen extends React.Component {
                                              {element.score}
                                         </Text>
                                    )}
-                                   subtitleStyle={{ color: "white" }}
+                                   subtitleStyle={{ color: "darkgray" }}
                                    subtitle={element.subtitle}
                               />
                          ))}
@@ -78,7 +78,9 @@ const styles = StyleSheet.create({
      },
      listItemStyle: {
           borderRadius: 15,
-          marginBottom: 16
+          marginBottom: 16,
+          borderColor: "gray",
+          borderWidth: 0.3
      },
      agendaContainer: {
           marginLeft: 16,

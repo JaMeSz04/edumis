@@ -1,53 +1,74 @@
 import React from "react"
 import { ScrollView, StyleSheet, View, Text } from "react-native"
 import TouchableScale from "react-native-touchable-scale"
-import { ListItem } from "react-native-elements"
+import { ListItem, Avatar } from "react-native-elements"
 import { inject, observer } from "mobx-react"
 
 @inject("parentStore")
 @observer
 export default class ParentAgendaScreen extends React.Component {
+     constructor(props) {
+          super(props)
+          this.state = {
+               selectedDate: "จันทร์"
+          }
+     }
      componentDidMount() {
           const { fetchStudentAgenda } = this.props.parentStore
           fetchStudentAgenda()
      }
      render() {
           const { studentAgenda } = this.props.parentStore
+          const returnVal =
+               studentAgenda.length === 0 ? (
+                    <View />
+               ) : (
+                    studentAgenda[this.state.selectedDate].map((agenda, j) => (
+                         <ListItem
+                              containerStyle={styles.listItemStyle}
+                              key={j}
+                              Component={TouchableScale}
+                              friction={90}
+                              tension={100}
+                              activeScale={0.95}
+                              linearGradientProps={{
+                                   colors:
+                                        dataStyle[
+                                             Object.keys(studentAgenda).indexOf(
+                                                  this.state.selectedDate
+                                             )
+                                        ],
+                                   start: [1, 0],
+                                   end: [0.2, 0]
+                              }}
+                              leftIcon={{ name: "assignment" }}
+                              title={agenda.title}
+                              titleStyle={{
+                                   color: "white",
+                                   fontWeight: "bold"
+                              }}
+                              subtitleStyle={{ color: "white" }}
+                              subtitle={agenda.time}
+                         />
+                    ))
+               )
+
+          const avatarDay = Object.keys(mapper).map((shortDay, i) => (
+               <Avatar
+                    key={i}
+                    size="medium"
+                    rounded
+                    containerStyle={styles.avatarDate}
+                    onPress={() =>
+                         this.setState({ selectedDate: mapper[shortDay] })
+                    }
+                    title={shortDay}
+               />
+          ))
           return (
                <ScrollView style={styles.container}>
-                    {Object.keys(studentAgenda).map((day, i) => (
-                         <View style={styles.agendaContainer} key={i}>
-                              <Text style={styles.dayText}> {day} </Text>
-                              <View>
-                                   {studentAgenda[day].map((agenda, j) => (
-                                        <ListItem
-                                             containerStyle={
-                                                  styles.listItemStyle
-                                             }
-                                             key={j}
-                                             Component={TouchableScale}
-                                             friction={90}
-                                             tension={100}
-                                             activeScale={0.95}
-                                             linearGradientProps={{
-                                                  colors: dataStyle[i],
-                                                  start: [1, 0],
-                                                  end: [0.2, 0]
-                                             }}
-                                             leftIcon={{ name: "assignment" }}
-                                             title={agenda.title}
-                                             titleStyle={{
-                                                  color: "white",
-                                                  fontWeight: "bold"
-                                             }}
-                                             subtitleStyle={{ color: "white" }}
-                                             subtitle={agenda.time}
-                                        />
-                                   ))}
-                              </View>
-                         </View>
-                    ))}
-                    <View />
+                    <View style={styles.dayList}>{avatarDay}</View>
+                    <View style={styles.agendaContainer}>{returnVal}</View>
                </ScrollView>
           )
      }
@@ -55,6 +76,14 @@ export default class ParentAgendaScreen extends React.Component {
 
 ParentAgendaScreen.navigationOptions = {
      title: "ตารางเรียน"
+}
+
+const mapper = {
+     จ: "จันทร์",
+     อัง: "อังคาร",
+     พ: "พุธ",
+     พฤ: "พฤหัสบดี",
+     ศ: "ศุกร์"
 }
 
 const styles = StyleSheet.create({
@@ -71,6 +100,7 @@ const styles = StyleSheet.create({
           marginBottom: 16
      },
      agendaContainer: {
+          marginTop: 32,
           marginLeft: 16,
           marginRight: 16
      },
@@ -78,6 +108,18 @@ const styles = StyleSheet.create({
           marginBottom: 16,
           fontSize: 18,
           fontWeight: "bold"
+     },
+     dayList: {
+          flex: 1,
+          flexDirection: "row",
+          marginLeft: 16,
+          marginRight: 16,
+          marginTop: 16,
+          alignSelf: "center"
+     },
+     avatarDate: {
+          marginLeft: 8,
+          marginRight: 8
      },
      emptyDate: {
           height: 15,
