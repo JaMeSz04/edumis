@@ -1,6 +1,7 @@
 import React from "react"
 import { ListItem, Button } from "react-native-elements"
-import { View, ScrollView, StyleSheet, Alert, Picker } from "react-native"
+import { View, ScrollView, StyleSheet, Alert, Platform } from "react-native"
+import { Dropdown } from "react-native-material-dropdown"
 import { observer } from "mobx-react"
 
 export default StudentListView = ({
@@ -60,32 +61,27 @@ export default StudentListView = ({
 )
 
 const ControlButton = ({ status, title, choices, disable, onChange, i }) => {
+     const currentColor = colorList[0]
      if (status === undefined)
           return (
-               <Picker
-                    selectedValue={status}
-                    style={{
-                         width: 130,
+               <Dropdown
+                    animationDuration={0}
+                    containerStyle={{
                          height: 50,
-                         backgroundColor: colorList[choices.indexOf(status)],
-                         borderRadius: 16,
-                         alignSelf: "center"
+                         width: 100,
+                         backgroundColor: colorList[0]
                     }}
-                    onValueChange={(itemValue, itemIndex) =>
-                         onChange(itemValue)
-                    }
-               >
-                    {choices.map((element, key) => (
-                         <Picker.Item
-                              style={{ color: "white" }}
-                              key={key}
-                              label={element}
-                              value={element}
-                         />
-                    ))}
-               </Picker>
+                    label={choices.length === 0 ? "" : choices[0]}
+                    dropdownOffset={{ top: 16, left: 32 }}
+                    value={status}
+                    data={choices.map(element => ({
+                         value: element
+                    }))}
+                    onChangeText={(value, index, data) => onChange(value)}
+               />
           )
      const color = { backgroundColor: status ? "#790105" : "#0D631F" }
+
      if (disable)
           return (
                <Button
@@ -96,28 +92,21 @@ const ControlButton = ({ status, title, choices, disable, onChange, i }) => {
           )
      else
           return (
-               <Picker
-                    selectedValue={status}
-                    style={{
-                         width: 130,
+               <Dropdown
+                    animationDuration={0}
+                    dropdownOffset={{ top: 16, left: 32 }}
+                    value={status}
+                    containerStyle={{
                          height: 50,
-                         backgroundColor: colorList[choices.indexOf(status)],
-                         borderRadius: 16,
-                         alignSelf: "center"
+                         width: 100,
+                         backgroundColor: colorList[choices.indexOf(status)]
                     }}
-                    onValueChange={(itemValue, itemIndex) =>
-                         onChange(itemValue)
-                    }
-               >
-                    {choices.map((element, key) => (
-                         <Picker.Item
-                              style={{ color: "white" }}
-                              key={key}
-                              label={element}
-                              value={element}
-                         />
-                    ))}
-               </Picker>
+                    label={choices.length === 0 ? "" : choices[0]}
+                    data={choices.map(element => ({
+                         value: element
+                    }))}
+                    onChangeText={(value, index, data) => onChange(value)}
+               />
           )
 }
 
