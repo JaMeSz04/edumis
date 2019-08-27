@@ -256,29 +256,21 @@ const mockDriver = [
                "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
           subtitle: "ป 2/5",
           statusMessage: "ส่งเวลา 15:00",
-          absent: undefined
+          absent: "รับจากบ้าน"
      },
      {
           title: "Amy Farha",
           avatar:
                "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
           subtitle: "ป 2/5",
-          absent: true
+          absent: "รับจากบ้าน"
      },
      {
           title: "Amy Farha",
           avatar:
                "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
           subtitle: "ป 2/5",
-          absent: true
-     },
-     {
-          title: "Amy Farha",
-          avatar:
-               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
-          subtitle: "ป 2/5",
-          statusMessage: "ส่งเวลา 15:00",
-          absent: false
+          absent: "รับจากบ้าน"
      },
      {
           title: "Amy Farha",
@@ -286,7 +278,15 @@ const mockDriver = [
                "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
           subtitle: "ป 2/5",
           statusMessage: "ส่งเวลา 15:00",
-          absent: false
+          absent: "รับจากบ้าน"
+     },
+     {
+          title: "Amy Farha",
+          avatar:
+               "https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg",
+          subtitle: "ป 2/5",
+          statusMessage: "ส่งเวลา 15:00",
+          absent: "รับจากบ้าน"
      }
 ]
 

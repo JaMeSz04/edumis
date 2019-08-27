@@ -68,7 +68,7 @@ const ControlButton = ({ status, title, choices, disable, onChange, i }) => {
                     animationDuration={0}
                     containerStyle={{
                          height: 50,
-                         width: 100,
+                         width: 130,
                          backgroundColor: colorList[0]
                     }}
                     label={choices.length === 0 ? "" : choices[0]}
@@ -98,7 +98,7 @@ const ControlButton = ({ status, title, choices, disable, onChange, i }) => {
                     value={status}
                     containerStyle={{
                          height: 50,
-                         width: 100,
+                         width: 130,
                          backgroundColor: colorList[choices.indexOf(status)]
                     }}
                     label={choices.length === 0 ? "" : choices[0]}
